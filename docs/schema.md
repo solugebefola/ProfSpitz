@@ -18,6 +18,19 @@ id          | integer   |
 teacher_id  | integer   | foreign_key, indexed
 student_id  | integer   | foreign_key, indexed
 
+## School
+column name | data type | other information
+------------|-----------|------------------
+id          | integer   |
+number_admins| integer  | acts as limit
+
+## Class
+column name | data type | other information
+------------|-----------|------------------
+id          | integer   |
+teacher_id  | integer   | foreign_key, indexed
+
+
 ## Lesson Templates
 column name | data type | other information
 ------------|-----------|------------------
@@ -30,8 +43,8 @@ lesson_text_url | string    | link to text on main site
 column name | data type | other information
 ------------|-----------|------------------
 id          | integer   |
-teacher_id  | integer   | foreign_key, indexed
-admin_id    | integer   | foreign_key, indexed
+lesson_template_id  | integer   | foreign_key, indexed
+school_id   | integer   | foreign_key, indexed
 
 ## Lessons
 column name | data type | other information
@@ -39,5 +52,15 @@ column name | data type | other information
 id          | integer   |
 lesson_template_id | integer  | foreign_key, indexed
 student_id  | integer   | foreign_key, indexed
-teacher_id  | integer | foreign_key, indexed
-input       | text    | lyrics from student
+class_id    | integer   | foreign_key, indexed
+input       | text      | lyrics from student
+locked      | boolean   | only modifiable by teachers or admins
+
+## Comments
+column name | data type | other information
+------------|-----------|------------------
+id          | integer   |
+lesson_id   | integer   | foreign_key, indexed
+teacher_id  | integer   | foreign_key, indexed (may not be necessary)
+content     | text      | actual_comments
+line_number | integer   | connection to the lesson input
